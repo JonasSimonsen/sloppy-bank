@@ -5,9 +5,13 @@
  */
 package dk.cphbusiness.banking.control;
 
+import dk.cphbusiness.banking.control.dto.CustomerDTO;
 import dk.cphbusiness.banking.data.BankDataAccessor;
+import dk.cphbusiness.banking.model.Account;
 import dk.cphbusiness.banking.model.BaseCustomer;
 import dk.cphbusiness.banking.model.Customer;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -39,5 +43,19 @@ public class BankManagerImplementation implements BankManager {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    private CustomerDTO createCustomerDTO(Customer customer) {
+        int balance = 0;
+        for (Account account : customer.listAccounts()) balance += account.getBalance();
+        return new CustomerDTO(customer.getId(), customer.getName(), balance);
+    }
+
+    @Override
+    public Collection<CustomerDTO> listCustomers() {
+        Collection<CustomerDTO> dtos = new ArrayList<>();
+        for (Customer customer : data.listCustomers()) {
+            dtos.add(createCustomerDTO(customer));
+        }
+        return dtos;    
+    }
     
 }

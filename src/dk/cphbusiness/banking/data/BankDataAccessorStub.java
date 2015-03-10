@@ -37,7 +37,7 @@ public class BankDataAccessorStub implements BankDataAccessor {
 
     @Override
     public Customer findCustomer(int id) {
-        
+        return customers.get(id);
     }
      
 }

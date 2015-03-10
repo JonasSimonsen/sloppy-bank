@@ -15,22 +15,24 @@ import java.util.Map;
  * @author jonassimonsen
  */
 public class BankDataAccessorStub implements BankDataAccessor {
-    private static BankDataAccessor instance = null;
     private Map<Integer, Customer> customers = new HashMap<>();
     private int nextId = 1;
-    
-    private BankDataAccessorStub() {
-    }
-    
-    public static BankDataAccessor getInstance() {
-        if (instance == null) instance = new BankDataAccessorStub();
-        return instance;
-    }
 
+//    private static BankDataAccessor instance = null;
+//    
+//    private BankDataAccessorStub() {
+//    }
+//
+//    public static BankDataAccessor getInstance() {
+//        if (instance == null) instance = new BankDataAccessorStub();
+//        return instance;
+//    }
+    
     @Override
     public Customer saveCustomer(Customer customer) {
-        if (customer.getId() == 0) 
+        if (customer.getId() == 0) {
             customer = new BaseCustomer(nextId++, customer.getName());
+        }
         customers.put(customer.getId(), customer);
         return customer;
     }
@@ -39,5 +41,5 @@ public class BankDataAccessorStub implements BankDataAccessor {
     public Customer findCustomer(int id) {
         return customers.get(id);
     }
-     
+
 }

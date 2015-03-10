@@ -5,7 +5,7 @@
  */
 package dk.cphbusiness.banking.control;
 
-import dk.cphbusiness.banking.data.BankDataAccessorStub;
+import dk.cphbusiness.banking.data.BankDataAccessor;
 import dk.cphbusiness.banking.model.BaseCustomer;
 import dk.cphbusiness.banking.model.Customer;
 
@@ -14,11 +14,18 @@ import dk.cphbusiness.banking.model.Customer;
  * @author jonassimonsen
  */
 public class BankManagerImplementation implements BankManager {
+    private BankDataAccessor data;
+    
+    public BankManagerImplementation(BankDataAccessor data) {
+        this.data = data;
+    }
 
     @Override
     public int createCustomer(String name) {
         Customer customer = new BaseCustomer(0, name);
-        customer = BankDataAccessorStub.getInstance().saveCustomer(customer);
+//        customer = BankDataAccessorStub.getInstance().saveCustomer(customer);
+//        customer = BankDataAccessor.instance.saveCustomer(customer);
+        customer = data.saveCustomer(customer);
         return customer.getId();
     }
 

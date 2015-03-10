@@ -1,5 +1,15 @@
 package dk.cphbusiness.banking;
 
+import dk.cphbusiness.banking.model.Account;
+import dk.cphbusiness.banking.model.DepositAccount;
+import dk.cphbusiness.banking.model.BaseCustomer;
+import dk.cphbusiness.banking.model.CustomerAccount;
+import dk.cphbusiness.banking.model.UnsufficientFundsException;
+import dk.cphbusiness.banking.model.Customer;
+import dk.cphbusiness.banking.model.Bank;
+import dk.cphbusiness.banking.model.BaseAccount;
+import dk.cphbusiness.banking.model.BaseBank;
+
 public class Program {
   
   public static void main(String[] args) throws UnsufficientFundsException {

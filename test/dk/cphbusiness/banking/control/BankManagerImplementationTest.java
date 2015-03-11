@@ -25,13 +25,17 @@ public class BankManagerImplementationTest {
     @Test
     public void setup() throws Exception {
         final BankDataAccessor data = context.mock(BankDataAccessor.class);
-        final Customer kurt = new BaseCustomer(7, "Kurt");
+//        final Customer kurt = new BaseCustomer(7, "Kurt");
+        final Customer kurt = context.mock(Customer.class);
         
         BankManager manager = new BankManagerImplementation(data);
   
         context.checking(new Expectations() {{
               oneOf(data).saveCustomer(with(any(Customer.class)));
-              will(returnValue(kurt));    
+              will(returnValue(kurt));  
+              
+              oneOf(kurt).getId();
+              will(returnValue(7));
         }});
         
         int id = manager.createCustomer("Kurt");
